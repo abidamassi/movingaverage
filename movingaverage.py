@@ -79,15 +79,7 @@ st.markdown("""
         .metric-box { font-size: 14px; padding: 0.8rem; }
         h1 { font-size: 20px !important; }
         .stSidebar::before {
-            content: '📌 Pick a Stock';
-            display: block;
-            background-color: #fa621c;
-            color: white;
-            padding: 12px;
-            text-align: center;
-            font-weight: bold;
-            border-radius: 6px;
-            margin: 10px;
+            display: none;
         }
     }
     </style>
@@ -100,7 +92,7 @@ st.sidebar.markdown("""
     </div>
 """, unsafe_allow_html=True)
 
-st.sidebar.header("📅 Input Parameters")
+st.sidebar.header("🧮 Input Parameters")
 ticker = st.sidebar.text_input("Stock Ticker (Yahoo Finance Format)", value="BBCA.JK")
 start_date = st.sidebar.date_input("Start Date", value=pd.to_datetime("2021-12-12"))
 end_date = st.sidebar.date_input("End Date", value=datetime.today())
@@ -109,7 +101,7 @@ long_window = st.sidebar.number_input("Long MA", min_value=20, max_value=500, va
 forecast_days = st.sidebar.slider("Forecast Days Ahead", min_value=7, max_value=60, value=30)
 
 # --- Header ---
-st.title("📊 Stock Forecast & Moving Average — Finance Modeling")
+st.title("📊 Stock Forecast & Moving Average")
 st.markdown("""<hr style='margin-top:0; border-color:#34495e;'>""", unsafe_allow_html=True)
 
 # --- Load Data ---
