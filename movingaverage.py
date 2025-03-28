@@ -70,7 +70,12 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # --- Sidebar Inputs ---
-st.sidebar.image("logofm.png", use_container_width=True)
+st.sidebar.image("logomovingaverage.png", use_container_width=True)
+st.sidebar.markdown("""
+    <div style='padding: 10px; background-color: #1e3799; border-radius: 10px; text-align: center; color: white; font-weight: bold;'>
+    📌 Pick a Stock to Analyze
+    </div>
+""", unsafe_allow_html=True)
 st.sidebar.header("📥 Input Parameters")
 ticker = st.sidebar.text_input("Stock Ticker (Yahoo Finance Format)", value="BBCA.JK")
 start_date = st.sidebar.date_input("Start Date", value=pd.to_datetime("2021-12-12"))
@@ -80,7 +85,7 @@ long_window = st.sidebar.number_input("Long MA", min_value=20, max_value=500, va
 forecast_days = st.sidebar.slider("Forecast Days Ahead", min_value=7, max_value=60, value=30)
 
 # --- Header ---
-st.title("📊 Stock Forecast & Moving Average")
+st.title("Stock Forecast & Moving Average — Finance Modeling")
 st.markdown("""<hr style='margin-top:0; border-color:#34495e;'>""", unsafe_allow_html=True)
 
 # --- Load Data ---
@@ -195,7 +200,7 @@ Backtesting simulates how the strategy would have performed in the past using hi
 
 # --- Backtesting ---
 position = 0.0
-cash = 10000000  # hypothetical initial capital
+cash = 10000000
 buy_price = 0.0
 trade_log = []
 
