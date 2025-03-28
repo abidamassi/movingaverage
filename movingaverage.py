@@ -29,6 +29,19 @@ st.markdown("""
     .stSidebar h1, .stSidebar h2, .stSidebar h3, .stSidebar h4, .stSidebar h5, .stSidebar p, .stSidebar label, .stSidebar span {
         color: white !important;
     }
+    .logo-text {
+        font-family: 'Segoe UI', sans-serif;
+        font-weight: bold;
+        font-size: 24px;
+        text-align: center;
+        margin: 10px 20px 30px 20px;
+    }
+    .logo-white {
+        color: white;
+    }
+    .logo-orange {
+        color: #fa621c;
+    }
     h1 {
         font-size: 26px !important;
         color: #F0F4F8;
@@ -65,18 +78,29 @@ st.markdown("""
     @media (max-width: 768px) {
         .metric-box { font-size: 14px; padding: 0.8rem; }
         h1 { font-size: 20px !important; }
+        .stSidebar::before {
+            content: '📌 Pick a Stock';
+            display: block;
+            background-color: #fa621c;
+            color: white;
+            padding: 12px;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 6px;
+            margin: 10px;
+        }
     }
     </style>
 """, unsafe_allow_html=True)
 
 # --- Sidebar Inputs ---
-st.sidebar.image("logomovingaverage.png", use_container_width=True)
 st.sidebar.markdown("""
-    <div style='padding: 10px; background-color: #1e3799; border-radius: 10px; text-align: center; color: white; font-weight: bold;'>
-    📌 Pick a Stock to Analyze
+    <div class="logo-text">
+        <span class="logo-white">Finance</span><span class="logo-orange">Modeling</span>
     </div>
 """, unsafe_allow_html=True)
-st.sidebar.header("📥 Input Parameters")
+
+st.sidebar.header("📅 Input Parameters")
 ticker = st.sidebar.text_input("Stock Ticker (Yahoo Finance Format)", value="BBCA.JK")
 start_date = st.sidebar.date_input("Start Date", value=pd.to_datetime("2021-12-12"))
 end_date = st.sidebar.date_input("End Date", value=datetime.today())
@@ -85,7 +109,7 @@ long_window = st.sidebar.number_input("Long MA", min_value=20, max_value=500, va
 forecast_days = st.sidebar.slider("Forecast Days Ahead", min_value=7, max_value=60, value=30)
 
 # --- Header ---
-st.title("Stock Forecast & Moving Average — Finance Modeling")
+st.title("📊 Stock Forecast & Moving Average — Finance Modeling")
 st.markdown("""<hr style='margin-top:0; border-color:#34495e;'>""", unsafe_allow_html=True)
 
 # --- Load Data ---
