@@ -242,8 +242,10 @@ if trade_log:
     - **Final Portfolio Value:** {final_value:,.0f}
     - **Total Profit:** {profit:,.0f} ({roi:.2f}%)
     """)
+    trade_df = pd.DataFrame(trade_log)
+    trade_df['Date'] = trade_df['Date'].dt.strftime('%Y-%m-%d')  # ✅ Format date clean
     st.write("**Trade Log:**")
-    st.dataframe(pd.DataFrame(trade_log))
+    st.dataframe(trade_df)
 else:
     st.info("No buy/sell signals were generated in the given time range.")
 
