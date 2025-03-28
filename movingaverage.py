@@ -70,7 +70,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # --- Sidebar Inputs ---
-st.sidebar.image("financemodelingpng.png", use_container_width=True)
+st.sidebar.image("logofm.png", use_container_width=True)
 st.sidebar.header("📥 Input Parameters")
 ticker = st.sidebar.text_input("Stock Ticker (Yahoo Finance Format)", value="BBCA.JK")
 start_date = st.sidebar.date_input("Start Date", value=pd.to_datetime("2021-12-12"))
