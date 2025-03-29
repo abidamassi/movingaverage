@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 from datetime import datetime
-from statsmodels.tsa.arima.model import ARIMA
+from pmdarima.arima import auto_arima  # ✅ Auto ARIMA
 
 # --- Streamlit Dashboard Config ---
 st.set_page_config(page_title="Stock Forecast & Moving Average — Finance Modeling", layout="wide")
@@ -28,19 +28,6 @@ st.markdown("""
     }
     .stSidebar h1, .stSidebar h2, .stSidebar h3, .stSidebar h4, .stSidebar h5, .stSidebar p, .stSidebar label, .stSidebar span {
         color: white !important;
-    }
-    .logo-text {
-        font-family: 'Segoe UI', sans-serif;
-        font-weight: bold;
-        font-size: 24px;
-        text-align: center;
-        margin: 10px 20px 30px 20px;
-    }
-    .logo-white {
-        color: white;
-    }
-    .logo-orange {
-        color: #fa621c;
     }
     h1 {
         font-size: 26px !important;
@@ -86,11 +73,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # --- Sidebar Inputs ---
-st.sidebar.markdown("""
-    <div class="logo-text">
-        <span class="logo-white">Finance</span><span class="logo-orange">Modeling</span>
-    </div>
-""", unsafe_allow_html=True)
+st.sidebar.image("logo.png", use_container_width=True)
 
 st.sidebar.header("🧮 Input Parameters")
 ticker = st.sidebar.text_input("Stock Ticker (Yahoo Finance Format)", value="BBCA.JK")
@@ -125,10 +108,9 @@ df['Signal'] = 0
 df.loc[df['MA_Short'] > df['MA_Long'], 'Signal'] = 1
 df['Position'] = df['Signal'].diff()
 
-# --- ARIMA Forecasting ---
-model = ARIMA(df['y'], order=(5, 1, 0))
-model_fit = model.fit()
-forecast_values = model_fit.forecast(steps=forecast_days)
+# --- Auto ARIMA Forecasting ---
+model = auto_arima(df['y'], seasonal=False, trace=False, error_action='ignore', suppress_warnings=True)
+forecast_values = model.predict(n_periods=forecast_days)
 forecast_index = pd.date_range(start=df['ds'].iloc[-1], periods=forecast_days+1, freq='B')[1:]
 forecast_df = pd.DataFrame({'ds': forecast_index, 'yhat': forecast_values})
 
@@ -243,7 +225,7 @@ if trade_log:
     - **Total Profit:** {profit:,.0f} ({roi:.2f}%)
     """)
     trade_df = pd.DataFrame(trade_log)
-    trade_df['Date'] = trade_df['Date'].dt.strftime('%Y-%m-%d')  # ✅ Format date clean
+    trade_df['Date'] = trade_df['Date'].dt.strftime('%Y-%m-%d')
     st.write("**Trade Log:**")
     st.dataframe(trade_df)
 else:
