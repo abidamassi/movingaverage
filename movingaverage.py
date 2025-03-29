@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 from datetime import datetime
-from pmdarima.arima import auto_arima  # ✅ Auto ARIMA
+from statsmodels.tsa.arima.model import ARIMA
 
 # --- Streamlit Dashboard Config ---
 st.set_page_config(page_title="Stock Forecast & Moving Average — Finance Modeling", layout="wide")
@@ -108,9 +108,10 @@ df['Signal'] = 0
 df.loc[df['MA_Short'] > df['MA_Long'], 'Signal'] = 1
 df['Position'] = df['Signal'].diff()
 
-# --- Auto ARIMA Forecasting ---
-model = auto_arima(df['y'], seasonal=False, trace=False, error_action='ignore', suppress_warnings=True)
-forecast_values = model.predict(n_periods=forecast_days)
+# --- ARIMA Forecasting (Tuned for more fluctuation) ---
+model = ARIMA(df['y'], order=(8, 1, 5))
+model_fit = model.fit()
+forecast_values = model_fit.forecast(steps=forecast_days)
 forecast_index = pd.date_range(start=df['ds'].iloc[-1], periods=forecast_days+1, freq='B')[1:]
 forecast_df = pd.DataFrame({'ds': forecast_index, 'yhat': forecast_values})
 
