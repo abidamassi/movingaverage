@@ -168,7 +168,7 @@ st.markdown("""
 
 Based on the crossover of MA{} and MA{}:
 - When the **short-term MA (MA{})** crosses **above** the long-term MA (MA{}), it's a **BUY signal**.
-- When the **short-term MA** crosses **below** the long-term MA, it's a **SELL/HOLD signal**.
+- When the **short-term MA (MA{})** crosses **below** the long-term MA (MA{}), it's a **SELL/HOLD signal**.
 
 **Current Decision:**
 Since MA{} is **{}** MA{}, the signal is **{}**.
