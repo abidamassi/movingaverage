@@ -6,7 +6,7 @@ from datetime import datetime
 from statsmodels.tsa.arima.model import ARIMA
 
 # --- Streamlit Dashboard Config ---
-st.set_page_config(page_title="Stock Forecast & Moving Average — Finance Modeling", layout="wide")
+st.set_page_config(page_title="Athaya Forecast & Moving Average — Finance Modeling", layout="wide")
 
 # --- Custom CSS ---
 st.markdown("""
