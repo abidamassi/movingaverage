@@ -84,7 +84,7 @@ long_window = st.sidebar.number_input("Long MA", min_value=20, max_value=500, va
 forecast_days = st.sidebar.slider("Forecast Days Ahead", min_value=7, max_value=60, value=30)
 
 # --- Header ---
-st.title("📊 Athaya Forecast & Moving Average")
+st.title("📊 Stock Forecast & Moving Average")
 st.markdown("""<hr style='margin-top:0; border-color:#34495e;'>""", unsafe_allow_html=True)
 
 # --- Load Data ---
