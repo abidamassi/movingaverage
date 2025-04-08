@@ -220,11 +220,14 @@ profit = final_value - 10000000
 roi = profit / 10000000 * 100
 
 if trade_log:
-    st.markdown(f"""
-    - **Initial Capital:** 10,000,000
-    - **Final Portfolio Value:** {final_value:,.0f}
-    - **Total Profit:** {profit:,.0f} ({roi:.2f}%)
-    """)
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.markdown(f"""<div class='metric-box'>💰 Initial Capital<br>10,000,000</div>""", unsafe_allow_html=True)
+    with col2:
+        st.markdown(f"""<div class='metric-box'>📦 Final Portfolio Value<br>{final_value:,.0f}</div>""", unsafe_allow_html=True)
+    with col3:
+        st.markdown(f"""<div class='metric-box'>📈 Total Profit<br>{profit:,.0f} ({roi:.2f}%)</div>""", unsafe_allow_html=True)
+
     trade_df = pd.DataFrame(trade_log)
     trade_df['Date'] = trade_df['Date'].dt.strftime('%Y-%m-%d')
     st.write("**Trade Log:**")
