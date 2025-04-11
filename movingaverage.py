@@ -274,9 +274,6 @@ Backtesting simulates how the strategy would have performed in the past using hi
 """, unsafe_allow_html=True)
         
     # End of st.spinner context: spinner otomatis menghilang saat selesai pemrosesan
-    
+
 else:
-    # Tampilkan info di tengah layar ketika belum ada submit
-    col1, col2, col3 = st.columns([1, 2, 1])
-    with col2:
-        st.info("Please enter input parameters and click 'Submit' to run the analysis.")
+    st.info("Please enter input parameters and click 'Submit' to run the analysis.")
