@@ -11,10 +11,6 @@ st.set_page_config(page_title="Stock Forecast & Moving Average — Finance Model
 # --- Custom CSS ---
 st.markdown("""
     <style>
-    /* Menghilangkan menu hamburger dan header */
-    #MainMenu {visibility: hidden;}
-    header {visibility: hidden;}
-    
     html, body, [class*="css"]  {
         background-color: #050915;
         color: #E1E6ED;
